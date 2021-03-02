@@ -43,6 +43,7 @@ const usuariosPut = async(req, res = response) => {
     if(password) {
         // Encriptar la contraseña
         const salt = bcryptjs.genSaltSync();
+
         resto.password = bcryptjs.hashSync(password, salt);
     }
 
@@ -59,10 +60,6 @@ const usuariosPatch = (req, res = response) => {
 
 const usuariosDelete = async(req, res = response) => {
     const { id } = req.params;
-
-    // Fisicamente lo borramos
-    // const usuario = await Usuario.findByIdAndDelete(id);
-
     const usuario = await Usuario.findByIdAndUpdate(id, { estado: false });
 
     res.json(usuario);
